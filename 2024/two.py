@@ -1,7 +1,7 @@
 import read
 
 
-def part1(input: list[str]) -> None:
+def part_1(input: list[str]) -> int:
     def is_safe(report: str) -> bool:
         numbers = list(map(int, report.strip().split(" ")))
         sign = 0
@@ -16,10 +16,10 @@ def part1(input: list[str]) -> None:
         return True
 
     result = sum(is_safe(report) for report in input)
-    print(f"Part 1: {result}")
+    return result
 
 
-def part2(input: list[str]) -> None:
+def part_2(input: list[str]) -> int:
     def is_safe(report: str) -> bool:
         numbers = list(map(int, report.strip().split(" ")))
         sign = 0
@@ -45,10 +45,8 @@ def part2(input: list[str]) -> None:
         return False
 
     result = sum(is_fault_safe(report) for report in input)
-    print(f"Part 2: {result}")
+    return result
 
 
 if __name__ == "__main__":
-    input = read.load_input(2, 2024)
-    part1(input)
-    part2(input)
+    read.test_solution(2, 2024, part_1, part_2)

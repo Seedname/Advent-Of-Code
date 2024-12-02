@@ -1,7 +1,7 @@
 import read
 
 
-def part1(input: list[str]) -> None:
+def part_1(input: list[str]) -> int:
     total = 0
     for line in input:
         _, card = line.split(": ")
@@ -20,10 +20,11 @@ def part1(input: list[str]) -> None:
                     current <<= 1
 
         total += current
-    print(f"Part 1: {total}")
+
+    return total
 
 
-def part2(input: list[str]) -> None:
+def part_2(input: list[str]) -> int:
     total = 0
     duplicates = list([1] * len(input))
     for i in range(len(input)):
@@ -42,10 +43,8 @@ def part2(input: list[str]) -> None:
 
         total += duplicates[i]
 
-    print(f"Part 2: {total}")
+    return total
 
 
 if __name__ == '__main__':
-    input = read.load_input(4, 2023)
-    part1(input)
-    part2(input)
+    read.test_solution(4, 2023, part_1, part_2)

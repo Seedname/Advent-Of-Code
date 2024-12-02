@@ -1,12 +1,13 @@
 import read
 
-def part1(input: list[str]) -> None:
 
-
-def part2(input: list[str]) -> None:
+def part_1(input: list[str]) -> int:
     pass
 
+
+def part_2(input: list[str]) -> int:
+    pass
+
+
 if __name__ == "__main__":
-    input = read.load_input(5, 2024)
-    part1(input)
-    part2(input)
+    read.test_solution(5, 2023, part_1, part_2)

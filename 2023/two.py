@@ -1,7 +1,7 @@
 import read
 
 
-def part1(input: list[str]) -> None:
+def part_1(input: list[str]) -> int:
     sum_ids = 0
 
     mappings = {"red": 12,
@@ -28,10 +28,10 @@ def part1(input: list[str]) -> None:
             _, cid = game.split(" ")
             sum_ids += int(cid)
 
-    print(f"Part 1: {sum_ids}")
+    return sum_ids
 
 
-def part2(input: list[str]) -> None:
+def part_2(input: list[str]) -> int:
     sum_power = 0
 
     for line in input:
@@ -50,11 +50,8 @@ def part2(input: list[str]) -> None:
 
         sum_power += mappings["red"] * mappings["green"] * mappings["blue"]
 
-    print(f"Part 2: {sum_power}")
+    return sum_power
 
 
 if __name__ == "__main__":
-    input = read.load_input(2, 2023)
-
-    part1(input)
-    part2(input)
+    read.test_solution(2, 2023, part_1, part_2)

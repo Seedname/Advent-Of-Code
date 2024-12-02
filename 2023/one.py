@@ -1,17 +1,17 @@
 import read
 
 
-def part1(input: list[str]) -> None:
+def part_1(input: list[str]) -> int:
     def get_calibration_value(string: str) -> int:
         numbers = set("0123456789")
         nums_only = list(filter(lambda x: x in numbers, string))
         return int(nums_only[0] + nums_only[-1])
 
     result = sum(get_calibration_value(string) for string in input)
-    print(f"Part 1: {result}")
+    return result
 
 
-def part2(input: list[str]) -> None:
+def part_2(input: list[str]) -> int:
     def get_calibration_value(string: str) -> int:
         mappings = {'one': 1, 'two': 2, 'three': 3, 'four': 4, 'five': 5, 'six': 6, 'seven': 7, 'eight': 8, 'nine': 9}
 
@@ -52,11 +52,8 @@ def part2(input: list[str]) -> None:
         return value
 
     result = sum(get_calibration_value(string) for string in input)
-    print(f"Part 2: {result}")
+    return result
 
 
 if __name__ == "__main__":
-    input = read.load_input(1, 2023)
-
-    part1(input)
-    part2(input)
+    read.test_solution(1, 2023, part_1, part_2)

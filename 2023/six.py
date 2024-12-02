@@ -1,7 +1,7 @@
 import read
 
 
-def part1(input: list[str]) -> None:
+def part_1(input: list[str]) -> int:
     _, times = input[0].split(":")
     times = map(int, filter(lambda x: x != "", map(str.strip, times.split(" "))))
     _, distances = input[1].split(":")
@@ -17,25 +17,23 @@ def part1(input: list[str]) -> None:
                 ways += 1
         prod *= ways
 
-    print(f"Part 1: {prod}")
+    return ways
 
 
-def part2(input: list[str]) -> None:
+def part_2(input: list[str]) -> int:
     _, times = input[0].split(":")
     time = int(''.join(filter(lambda x: x != "", map(str.strip, times.split(" ")))))
     _, distances = input[1].split(":")
     distance = int(''.join(filter(lambda x: x != "", map(str.strip, distances.split(" ")))))
     ways = 0
+
     for i in range(time+1):
         d = (time - i) * i
         if d > distance:
             ways += 1
 
-    print(f"Part 2: {ways}")
+    return ways
 
 
 if __name__ == "__main__":
-    input = read.load_input(6, 2023)
-    # input = read.load_from_file("four")
-    part1(input)
-    part2(input)
+    read.test_solution(6, 2023, part_1, part_2)

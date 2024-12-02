@@ -2,7 +2,7 @@ import string
 import read
 
 
-def part1(input: list[str]) -> None:
+def part_1(input: list[str]) -> int:
     NON_SYMBOLS = set("0123456789.")
     NUMERIC = set(string.digits)
     visited = set()
@@ -48,10 +48,10 @@ def part1(input: list[str]) -> None:
             if input[i][j] not in NON_SYMBOLS:
                 total += sum(get_adjacent_numbers(i, j))
 
-    print(f"Part 1: {total}")
+    return total
 
 
-def part2(input: list[str]) -> None:
+def part_2(input: list[str]) -> int:
     NON_SYMBOLS = set("0123456789.")
     NUMERIC = set(string.digits)
     visited = set()
@@ -105,12 +105,8 @@ def part2(input: list[str]) -> None:
             if input[i][j] not in NON_SYMBOLS:
                 total += get_adjacent_gear_ratio(i, j)
 
-    print(f"Part 2: {total}")
+    return total
 
 
 if __name__ == "__main__":
-    input = read.load_input(3, 2023)
-
-    part1(input)
-    part2(input)
-
+    read.test_solution(3, 2023, part_1, part_2)
