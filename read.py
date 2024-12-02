@@ -46,7 +46,7 @@ def get_cookies(browser: str) -> CookieJar:
     cookiejar = browsers[browser](domain_name='adventofcode.com')
 
     if 'session' not in {cookie.name for cookie in cookiejar}:
-        raise EnvironmentError("Not authenticated on adventofcode.com")
+        raise EnvironmentError(f"Not authenticated on adventofcode.com on {browser}")
 
     return cookiejar
 
