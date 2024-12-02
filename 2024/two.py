@@ -36,11 +36,11 @@ def part2(input: list[str]) -> None:
     def is_fault_safe(report: str) -> bool:
         if is_safe(report):
             return True
-        numbers = list(map(int, report.strip().split(" ")))
+        numbers = report.strip().split(" ")
         for i in range(len(numbers)):
             nums = numbers[:]
             nums.pop(i)
-            if is_safe(' '.join(map(str, nums))):
+            if is_safe(' '.join(nums)):
                 return True
         return False
 
