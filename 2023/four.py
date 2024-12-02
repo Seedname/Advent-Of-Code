@@ -46,6 +46,6 @@ def part2(input: list[str]) -> None:
 
 
 if __name__ == '__main__':
-    input = read.get_input(4, 2023)
+    input = read.load_input(4, 2023)
     part1(input)
     part2(input)
