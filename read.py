@@ -102,6 +102,7 @@ def test_solution(day: int, year: int, *parts: typing.Callable, browser: str = "
     solution_input = load_input(day, year, browser)
 
     def print_func_result(func: typing.Callable, input: list[str]) -> None:
+        if func is None: return
         if isinstance(func, typing.Callable):
             name = ' '.join(func.__name__.split("_")).capitalize()
             print(f"{name}: {func(input)}")
