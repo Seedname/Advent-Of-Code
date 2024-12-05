@@ -3,7 +3,7 @@ import re
 
 
 def part_1(input: list[str]) -> int:
-    matches = re.findall(r"mul\((\d+),(\d+)\)", ''.join(input))
+    matches = re.findall("mul\((\d+),(\d+)\)", ''.join(input))
     sum = 0
     for match in matches:
         first, second = map(int, match)
@@ -16,9 +16,9 @@ def part_2(input: list[str]) -> int:
     sum = 0
     enabled = True
     for match in matches:
-        if 'do()' in match:
+        if 'do()' == match:
             enabled = True
-        elif "don't()" in match:
+        elif "don't()" == match:
             enabled = False
         elif enabled:
             num1, num2 = map(int, re.search("mul\((\d+),(\d+)\)", match).groups())
