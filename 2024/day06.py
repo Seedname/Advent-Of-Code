@@ -35,7 +35,7 @@ def get_positions(input: list[str]):
     while True:
         next_x, next_y = (guard.position[0] + guard.facing[0], guard.position[1] + guard.facing[1])
 
-        if next_x < 0 or next_y < 0 or next_x >= len(input) or next_y >= len(input[0]):
+        if next_x < 0 or next_y < 0 or next_y >= len(input) or next_x >= len(input[0]):
             break
 
         if input[next_y][next_x] == "#":
