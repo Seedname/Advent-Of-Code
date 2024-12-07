@@ -96,8 +96,9 @@ def test_solution(day: int, year: int, *parts: typing.Callable, browser: str = "
     :param day: day from 1-25
     :param year: year when problem is from
     :param parts: each part to solution as a function
-    :param browser: browser: firefox, chrome, chromium, opera, opera_gx, safari, brave, edge, vivaldi
+    :param browser: firefox, chrome, chromium, opera, opera_gx, safari, brave, edge, vivaldi
     """
+
     example_inputs = [load_example(day, year, browser, n) for n in range(1, len(parts)+1)]
     solution_input = load_input(day, year, browser)
 
@@ -116,3 +117,20 @@ def test_solution(day: int, year: int, *parts: typing.Callable, browser: str = "
     print(f"\n{'SOLUTION RESULTS':=^31}")
     for func in parts:
         print_func_result(func, solution_input)
+
+
+def save_input_to_file(day: int, year: int, file_name: str = None, browser: str = "firefox") -> None:
+    """
+    Saves input to file
+    :param day: day from 1-25
+    :param year: year when problem is from
+    :param file_name: name of file
+    :param browser: firefox, chrome, chromium, opera, opera_gx, safari, brave, edge, vivaldi
+    """
+
+    if file_name == None:
+        file_name = f"input{day:02d}_{year}"
+
+    with open(file_name, 'w') as f:
+        input = load_input(day, year, browser)
+        f.write('\n'.join(input))

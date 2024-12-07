@@ -3,7 +3,6 @@ import read
 
 def part_1(input: list[str]) -> int:
     total = 0
-    # if len(input) > 100: return 0
 
     rows = len(input)
     cols = len(input[0])

@@ -10,4 +10,6 @@ def part_2(input: list[str]) -> int:
 
 
 if __name__ == "__main__":
-    read.test_solution(, 2024, part_1, part_2)
+    day = 7
+    read.save_input_to_file(day, 2024)
+    read.test_solution(day, 2024, part_1, part_2)

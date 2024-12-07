@@ -1,5 +1,6 @@
 import read
 from dataclasses import dataclass
+from copy import deepcopy
 
 
 class Direction:
@@ -71,20 +72,24 @@ def part_2(input: list[str]) -> int:
         positions = set()
         positions.add((guard.position, guard.facing))
 
-        new_input: list[str] = [line[:] for line in input]
-        new_input[y] = new_input[y][:x] + "#" + new_input[y][x+1:]
+        # new_input: list[str] = deepcopy(input)
+        # new_input[y] = new_input[y][:x] + "#" + new_input[y][x+1:]
+        old_item = input[y][x]
+        input[y] = input[y][:x] + "#" + input[y][x+1:]
 
         while True:
             next_x, next_y = (guard.position[0] + guard.facing[0], guard.position[1] + guard.facing[1])
 
-            if next_x < 0 or next_y < 0 or next_y >= len(new_input) or next_x >= len(new_input[0]):
+            if next_x < 0 or next_y < 0 or next_y >= len(input) or next_x >= len(input[0]):
+                input[y] = input[y][:x] + old_item + input[y][x+1:]
                 return False
 
-            if new_input[next_y][next_x] == "#":
+            if input[next_y][next_x] == "#":
                 guard.facing = direction_mappings[guard.facing]
             else:
                 guard.position = (next_x, next_y)
                 if (guard.position, guard.facing) in positions:
+                    input[y] = input[y][:x] + old_item + input[y][x + 1:]
                     return True
                 positions.add((guard.position, guard.facing))
 
@@ -102,4 +107,5 @@ def part_2(input: list[str]) -> int:
 
 
 if __name__ == "__main__":
+    read.save_input_to_file(6, 2024)
     read.test_solution(6, 2024, part_2)
