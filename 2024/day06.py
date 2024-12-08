@@ -107,5 +107,4 @@ def part_2(input: list[str]) -> int:
 
 
 if __name__ == "__main__":
-    read.save_input_to_file(6, 2024)
     read.test_solution(6, 2024, part_2)

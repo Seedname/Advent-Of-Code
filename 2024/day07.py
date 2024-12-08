@@ -1,8 +1,9 @@
 import read
 import math
 
+
 def part_1(input: list[str]) -> int:
-    def is_valid(line: str) -> bool | int:
+    def is_valid(line: str) -> int:
         test_num, nums = line.split(": ")
         test_num = int(test_num)
         nums = list(map(int, nums.strip().split(" ")))
@@ -19,13 +20,13 @@ def part_1(input: list[str]) -> int:
             if result == test_num:
                 return test_num
 
-        return False
+        return 0
 
     return sum(is_valid(line) for line in input)
 
 
 def part_2(input: list[str]) -> int:
-    def is_valid(line: str) -> bool | int:
+    def is_valid(line: str) ->  int:
         test_num, nums = line.split(": ")
         test_num = int(test_num)
         nums = list(map(int, nums.strip().split(" ")))
@@ -46,7 +47,7 @@ def part_2(input: list[str]) -> int:
             if result == test_num:
                 return test_num
 
-        return False
+        return 0
 
     return sum(is_valid(line) for line in input)
 
