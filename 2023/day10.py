@@ -276,18 +276,6 @@ def part_2(input: list[str]) -> int:
     input[y1][x1] = "X"
 
 
-    scale = 2
-    new_input = [['a' for _ in range(scale * len(input[0]))] for _ in range(len(input))]
-    for j in range(len(input)):
-        for i in range(len(input[0])):
-            new_input[j][scale * i] = input[j][i]
-            for k in range(scale):
-                if k == 0: continue
-                new_input[j][scale * i + k] = "."
-
-    input = new_input
-
-
     def sum_tuple(t1: tuple[int, int], t2: tuple[int, int]) -> tuple[int, int]:
         return t1[0] + t2[0], t1[1] + t2[1]
 
@@ -326,7 +314,7 @@ def part_2(input: list[str]) -> int:
     with open('output', 'w') as f:
         f.write("\n".join(''.join(line) for line in input))
 
-    return sum(line.count("I") / (scale ** 2) for line in input)
+    return sum(line.count("I") for line in input)
 
 
 if __name__ == "__main__":
