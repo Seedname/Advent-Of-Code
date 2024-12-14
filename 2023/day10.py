@@ -306,6 +306,7 @@ def part_2(input: list[str]) -> int:
                 x, y = pos
                 input[y][x] = "O"
 
+
     for i, line in enumerate(input):
         for j, char in enumerate(line):
             if char not in {"X", "Y", "I", "O"}:
