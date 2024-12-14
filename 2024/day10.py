@@ -54,7 +54,7 @@ def part_1(input: list[str]) -> int:
 
 
 def part_2(input: list[str]) -> int:
-    from collections import deque, defaultdict
+    from collections import deque
 
     UP = (0, -1)
     RIGHT = (1, 0)
@@ -79,7 +79,6 @@ def part_2(input: list[str]) -> int:
                        ((x1, y1), LEFT, []),
                        ((x1, y1), RIGHT, [])])
 
-        nine_poses = defaultdict(set)
         while poses:
             prev_pos, direction, previous_items = poses.pop()
             px, py = prev_pos
@@ -92,7 +91,7 @@ def part_2(input: list[str]) -> int:
             if curr_item < prev_item: continue
             if curr_item != prev_item + 1: continue
             if curr_item == 9:
-                nine_poses[curr_pos].add(str(previous_items))
+                total += 1
                 continue
 
             for cardinal in directions:
@@ -101,8 +100,6 @@ def part_2(input: list[str]) -> int:
                 prev_items = previous_items[:]
                 prev_items.append(curr_pos)
                 poses.append((curr_pos, cardinal, prev_items))
-
-        total += sum(len(path) for path in nine_poses.values())
 
     return total
 
