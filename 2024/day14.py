@@ -72,7 +72,7 @@ def part_1(input: list[str]) -> int:
 def part_2(input: list[str]) -> int:
     width = 101
     height = 103
-    robots = [tuple(map(int, re.findall('p=(-?\d+),(-?\d+) v=(-?\d+),(-?\d+)', line.strip())[0])) for line in input]
+    robots = [tuple(map(int, re.search('p=(-?\d+),(-?\d+) v=(-?\d+),(-?\d+)', line.strip()).groups())) for line in input]
 
     def get_robot_positions(robots, n):
         for j, robot in enumerate(robots):
@@ -106,12 +106,7 @@ def part_2(input: list[str]) -> int:
                 grid[pos[1]][pos[0]] = str(positions[pos])
             f.write('\n'.join(''.join(line) for line in grid) + f"\n{i}:\n")
 
-
-
-
     return -1
-
-
 
 
 if __name__ == "__main__":

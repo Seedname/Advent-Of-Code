@@ -79,81 +79,34 @@ def part_2(input: list[str]) -> int:
     def flood_fill(x, y, visited_poses) -> int:
 
         poses = deque([(x, y)])
-        directions = [UP, DOWN, LEFT, RIGHT]
-
+        directions = [RIGHT, DOWN, LEFT, UP]
         type = input[y][x]
-
         all_poses = set()
-        # sides = 0
-        while poses:
-            x, y = pos = poses.pop()
-            input[y][x] = "."
-            all_poses.add((x, y))
-            for direction in directions:
-                nx, ny = sum_tuple(pos, direction)
-                if nx < 0 or nx >= len(input[0]) or ny < 0 or ny >= len(input):
-                    continue
-                if input[ny][nx] != type:
-                    continue
-                poses.append((nx, ny))
-
-
-        inverse = {LEFT: RIGHT, UP: DOWN, DOWN: UP, RIGHT: LEFT}
-        perimeter_positions = {}
-        for pos in all_poses:
-            for direction in directions:
-                nx, ny = sum_tuple(pos, direction)
-                if nx < 0 or nx >= len(input[0]) or ny < 0 or ny >= len(input):
-                    perimeter_positions[(nx, ny)] = direction
-                    continue
-                if input[ny][nx] != type:
-                    if input[ny][nx] != '.':
-                        perimeter_positions[(nx, ny)] = direction
-                    continue
-
-        marked_off = set()
         sides = 0
-        for pos in perimeter_positions:
-            if pos in marked_off: continue
-            marked_off.add(pos)
 
-            added1 = False
-            for direction in (UP, DOWN):
-                new_pos = pos
+        while poses:
+            x, y = poses.popleft()
+            if (x, y) in all_poses:
+                continue
+            all_poses.add((x, y))
 
-                while True:
-                    nx, ny = new_pos = sum_tuple(new_pos, direction)
-                    if new_pos in perimeter_positions:
-                        marked_off.add(new_pos)
-                        added1 = True
-                        continue
-                    break
-            sides += added1
-
-            added2 = False
-            for direction in (LEFT, RIGHT):
-                new_pos = pos
-
-                while True:
-                    nx, ny = new_pos = sum_tuple(new_pos, direction)
-                    if new_pos in perimeter_positions:
-                        marked_off.add(new_pos)
-                        added2 = True
-                        continue
-                    break
-            sides += added2
-
-            if added1 == added2 == False:
-                sides += 1
+            for direction in directions:
+                nx, ny = sum_tuple((x, y), direction)
+                if 0 <= nx < len(input[0]) and 0 <= ny < len(input):
+                    if input[ny][nx] == type:
+                        poses.append((nx, ny))
+                    else:
+                        sides += 1
+                else:
+                    sides += 1
 
         visited_poses |= all_poses
         for pos in all_poses:
             x, y = pos
             input[y][x] = type
 
-        print(type, sides, len(all_poses))
-        return len(perimeter_positions) * len(all_poses)
-
+        print(type, len(all_poses), sides)
+        return sides * len(all_poses)
 
     input = [list(line) for line in input]
     total = 0

@@ -40,23 +40,26 @@ def part_2(input: list[str]) -> int:
     total = 0
     def is_int(tup: tuple[float, float]) -> bool | tuple[int, int]:
         a, b = tup
-        threshold = 0.3
+        threshold = 0.001
         if abs(round(a) - a) > threshold: return False
         if abs(round(b) - b) > threshold: return False
-        return (round(a), round(b))
+        return round(a), round(b)
 
     for i in tqdm(range(0, len(input), 3)):
-        x1, y1 = tuple(map(int, re.findall('X\+(\d+), Y\+(\d+)', input[i])[0]))
-        x2, y2 = tuple(map(int, re.findall('X\+(\d+), Y\+(\d+)', input[i+1])[0]))
-        x_prize, y_prize = tuple(map(int, re.findall('X=(\d+), Y=(\d+)', input[i+2])[0]))
+        x1, y1 = tuple(map(int, re.search('X\+(\d+), Y\+(\d+)', input[i]).groups()))
+        x2, y2 = tuple(map(int, re.search('X\+(\d+), Y\+(\d+)', input[i+1]).groups()))
+        x_prize, y_prize = tuple(map(int, re.search('X=(\d+), Y=(\d+)', input[i+2]).groups()))
 
         # x1 * a + x2 * b = x_prize - x2 * b
         # y1 * a + y2 * b = y_prize
-        x_prize += 1_000_000
-        y_prize += 1_000_000
+        x_prize += 10000000000000
+        y_prize += 10000000000000
         b = (y_prize - y1 * x_prize / x1) / (-y1 * x2 / x1 + y2)
         a = (x_prize - x2 * b) / x1
-        total += 3 * round(a) + round(b)
+        result = is_int((a, b))
+        if result is False: continue
+        a, b = result
+        total += 3 * a + b
         # print(a, b)
         # result = is_int((a, b))
         # if result is False: continue
